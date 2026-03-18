@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 東京自由行 | 4/28-5/2</title>
+<style>
+:root{
+  --pink:#D4436A;--pink-light:#F8E8EE;--pink-bg:#FFF5F7;
+  --navy:#2C3E50;--dark:#333;--white:#fff;
+  --green:#27AE60;--blue:#3498DB;--orange:#E67E22;--red:#E74C3C;
+  --shadow:0 2px 12px rgba(0,0,0,.08);
+  --radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI','Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--pink-bg);color:var(--dark);line-height:1.7}
+a{color:var(--pink);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#D4436A 0%,#E8738A 50%,#F4A5B8 100%);color:#fff;padding:40px 20px 30px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:rgba(255,255,255,.08);border-radius:50%}
+.header::after{content:'';position:absolute;bottom:-60px;left:-30px;width:220px;height:220px;background:rgba(255,255,255,.05);border-radius:50%}
+.header h1{font-size:2rem;font-weight:700;margin-bottom:4px;position:relative;z-index:1}
+.header .subtitle{font-size:1rem;opacity:.9;position:relative;z-index:1}
+.header .dates{display:inline-block;background:rgba(255,255,255,.2);padding:6px 18px;border-radius:20px;margin-top:10px;font-size:.9rem;position:relative;z-index:1}
+
+/* FLIGHT CARDS */
+.flight-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:-20px auto 20px;padding:0 16px;position:relative;z-index:2}
+.flight-card{background:#fff;border-radius:var(--radius);padding:14px 20px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;min-width:280px}
+.flight-card .icon{font-size:1.6rem}
+.flight-card .info{font-size:.82rem;color:#555}
+.flight-card .info strong{color:var(--dark);font-size:.9rem}
+.flight-card .route{font-size:1rem;font-weight:700;color:var(--navy)}
+
+/* NAV TABS */
+.nav{display:flex;overflow-x:auto;gap:4px;padding:10px 16px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.06);position:sticky;top:0;z-index:100;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{height:0}
+.nav button{flex-shrink:0;border:none;background:transparent;padding:10px 16px;font-size:.85rem;border-radius:8px;cursor:pointer;color:#777;font-weight:500;transition:.2s;white-space:nowrap}
+.nav button:hover{background:var(--pink-light);color:var(--pink)}
+.nav button.active{background:var(--pink);color:#fff;font-weight:600}
+
+/* MAIN */
+.container{max-width:900px;margin:0 auto;padding:0 16px 60px}
+.tab{display:none;animation:fadeIn .3s}
+.tab.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTION */
+.section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);margin:20px 0;padding:24px;overflow:hidden}
+.section h2{font-size:1.2rem;color:var(--navy);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--pink-light);display:flex;align-items:center;gap:8px}
+.section h3{font-size:1rem;color:var(--pink);margin:16px 0 8px}
+
+/* OVERVIEW GRID */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px}
+.overview-item{background:var(--pink-bg);border-radius:10px;padding:16px;text-align:center}
+.overview-item .label{font-size:.78rem;color:#888;margin-bottom:4px}
+.overview-item .value{font-size:1.1rem;font-weight:700;color:var(--navy)}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:'';position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--pink),var(--pink-light))}
+.tl-item{position:relative;margin-bottom:18px;padding-bottom:4px}
+.tl-item::before{content:'';position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--pink);border:2px solid #fff;box-shadow:0 0 0 2px var(--pink-light)}
+.tl-item.meal::before{background:var(--orange)}
+.tl-item.shop::before{background:var(--green)}
+.tl-item.transport::before{background:var(--blue)}
+.tl-time{font-size:.8rem;color:var(--pink);font-weight:600}
+.tl-title{font-weight:600;color:var(--navy);font-size:.95rem}
+.tl-desc{font-size:.85rem;color:#666;margin-top:2px}
+.tl-tag{display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:10px;margin-top:4px;font-weight:500}
+.tag-food{background:#FFF3E0;color:#E65100}
+.tag-transport{background:#E3F2FD;color:#1565C0}
+.tag-shop{background:#E8F5E9;color:#2E7D32}
+.tag-sight{background:#F3E5F5;color:#7B1FA2}
+.tag-hotel{background:#FBE9E7;color:#BF360C}
+
+/* RESTAURANT CARD */
+.resto-card{display:flex;gap:14px;background:var(--pink-bg);border-radius:10px;padding:14px;margin:10px 0;align-items:flex-start}
+.resto-card .emoji{font-size:1.8rem}
+.resto-card .name{font-weight:700;color:var(--navy);font-size:.95rem}
+.resto-card .meta{font-size:.8rem;color:#888}
+.resto-card .desc{font-size:.85rem;color:#555;margin-top:4px}
+
+/* MAP */
+.map-wrap{border-radius:10px;overflow:hidden;margin:16px 0;box-shadow:var(--shadow)}
+.map-wrap iframe{width:100%;height:350px;border:0}
+.map-btn{display:inline-flex;align-items:center;gap:6px;background:var(--blue);color:#fff;padding:10px 20px;border-radius:8px;font-size:.88rem;font-weight:500;margin-top:8px;transition:.2s}
+.map-btn:hover{background:#2980B9;text-decoration:none}
+
+/* SHOPPING CHECKLIST */
+.checklist{list-style:none}
+.checklist li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid #f0f0f0;transition:.15s}
+.checklist li:hover{background:var(--pink-bg)}
+.checklist li.checked .item-name{text-decoration:line-through;color:#aaa}
+.checklist input[type=checkbox]{width:18px;height:18px;accent-color:var(--pink);cursor:pointer;flex-shrink:0}
+.item-name{font-size:.92rem;flex:1}
+.item-note{font-size:.78rem;color:#999}
+.progress-bar{height:8px;background:#eee;border-radius:4px;overflow:hidden;margin:12px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--orange));border-radius:4px;transition:width .4s}
+.progress-text{font-size:.82rem;color:#888;text-align:right}
+
+/* BUDGET TABLE */
+.budget-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.budget-table th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-weight:500}
+.budget-table td{padding:10px 14px;border-bottom:1px solid #f0f0f0}
+.budget-table tr:hover td{background:var(--pink-bg)}
+.budget-table .total td{font-weight:700;background:var(--pink-light);color:var(--navy);font-size:1rem}
+.budget-note{font-size:.82rem;color:#888;margin-top:10px}
+
+/* TIPS */
+.tip-box{background:#FFF8E1;border-left:4px solid var(--orange);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:.88rem}
+.tip-box strong{color:var(--orange)}
+.warn-box{background:#FFEBEE;border-left:4px solid var(--red);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:.88rem}
+.warn-box strong{color:var(--red)}
+
+/* WEATHER */
+.weather{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#E3F2FD,#BBDEFB);padding:14px 18px;border-radius:10px;margin:12px 0}
+.weather .temp{font-size:1.3rem;font-weight:700;color:var(--navy)}
+.weather .desc{font-size:.85rem;color:#555}
+
+/* TRANSPORT INFO */
+.transport-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:10px 0}
+.transport-item{background:#E3F2FD;border-radius:8px;padding:12px;font-size:.85rem}
+.transport-item .label{font-weight:600;color:var(--navy);margin-bottom:4px}
+
+/* DAY HEADER */
+.day-header{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.day-num{background:var(--pink);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;flex-shrink:0}
+.day-info h2{margin:0;border:none;padding:0;font-size:1.15rem}
+.day-info .day-date{font-size:.85rem;color:#888}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .header h1{font-size:1.5rem}
+  .flight-bar{flex-direction:column;align-items:center}
+  .flight-card{min-width:auto;width:100%;max-width:350px}
+  .section{padding:16px}
+  .overview-grid{grid-template-columns:1fr 1fr}
+  .nav button{padding:8px 12px;font-size:.8rem}
+}
+
+/* PRINT */
+@media print{
+  .nav,.map-btn{display:none!important}
+  .tab{display:block!important}
+  .section{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+}
+
+/* COLLAPSIBLE */
+.collapsible{cursor:pointer;user-select:none}
+.collapsible::after{content:' ▾';font-size:.8rem}
+.collapsible.collapsed::after{content:' ▸'}
+.coll-content{overflow:hidden;transition:max-height .3s;max-height:2000px}
+.coll-content.collapsed{max-height:0}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>2026 東京自由行</h1>
+  <div class="subtitle">雙人浪漫之旅 | 四萬台幣玩轉東京</div>
+  <div class="dates">2026.04.28 (二) - 05.02 (六) | 5天4夜</div>
+</div>
+
+<!-- FLIGHT BAR -->
+<div class="flight-bar">
+  <div class="flight-card">
+    <div class="icon">&#9992;&#65039;</div>
+    <div>
+      <div class="route">TPE &#10132; NRT</div>
+      <div class="info"><strong>IT200</strong> Tiger | 4/28 06:35&#8594;11:00<br>桃園T1 &#8594; 成田T2</div>
+    </div>
+  </div>
+  <div class="flight-card">
+    <div class="icon">&#9992;&#65039;</div>
+    <div>
+      <div class="route">NRT &#10132; TPE</div>
+      <div class="info"><strong>IT203</strong> Tiger | 5/2 19:30&#8594;22:35<br>成田T2 &#8594; 桃園T1</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav" id="nav">
+  <button class="active" onclick="showTab('overview')">&#127968; 總覽</button>
+  <button onclick="showTab('day1')">Day1 抵達</button>
+  <button onclick="showTab('day2')">Day2 富士山</button>
+  <button onclick="showTab('day3')">Day3 購物</button>
+  <button onclick="showTab('day4')">Day4 市區</button>
+  <button onclick="showTab('day5')">Day5 返程</button>
+  <button onclick="showTab('shopping')">&#128722; 購物清單</button>
+  <button onclick="showTab('budget')">&#128176; 預算</button>
+</div>
+
+<div class="container">
+
+<!-- ====== OVERVIEW TAB ====== -->
+<div class="tab active" id="tab-overview">
+  <div class="section">
+    <h2>&#127803; 行程總覽</h2>
+    <div class="overview-grid">
+      <div class="overview-item"><div class="label">旅行天數</div><div class="value">5天4夜</div></div>
+      <div class="overview-item"><div class="label">同行人數</div><div class="value">2人</div></div>
+      <div class="overview-item"><div class="label">總預算</div><div class="value">40,000 TWD</div></div>
+      <div class="overview-item"><div class="label">約合日幣</div><div class="value">&#165;180,000</div></div>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-item"><div class="label">住宿</div><div class="value">三井花園酒店<br>五反田</div></div>
+      <div class="overview-item"><div class="label">交通樞紐</div><div class="value">JR山手線<br>五反田站</div></div>
+      <div class="overview-item"><div class="label">航空公司</div><div class="value">Tiger Air</div></div>
+      <div class="overview-item"><div class="label">機場</div><div class="value">成田 NRT</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>&#128197; 每日主題一覽</h2>
+    <table class="budget-table">
+      <tr><th>日期</th><th>主題</th><th>重點</th></tr>
+      <tr><td><strong>4/28 (二)</strong></td><td>抵達東京</td><td>成田機場&#8594;五反田、海鮮居酒屋</td></tr>
+      <tr><td><strong>4/29 (三)</strong></td><td>富士山一日遊</td><td>五合目、忍野八海、大石公園</td></tr>
+      <tr><td><strong>4/30 (四)</strong></td><td>銀座購物日</td><td>無印良品、SK-II、壽司壽喜燒</td></tr>
+      <tr><td><strong>5/1 (五)</strong></td><td>市區探索</td><td>新宿御苑、澀谷、拉麵燒肉</td></tr>
+      <tr><td><strong>5/2 (六)</strong></td><td>返程</td><td>東京站伴手禮、成田機場</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>&#9728;&#65039; 天氣與穿搭</h2>
+    <div class="weather">
+      <div class="temp">10-20&#8451;</div>
+      <div>
+        <div class="desc"><strong>東京 4月底~5月初</strong></div>
+        <div class="desc">薄外套+長袖，早晚偏涼。降水機率高，攜帶輕便雨具。</div>
+      </div>
+    </div>
+    <div class="weather" style="background:linear-gradient(135deg,#E8EAF6,#C5CAE9)">
+      <div class="temp">5-12&#8451;</div>
+      <div>
+        <div class="desc"><strong>富士山五合目</strong></div>
+        <div class="desc">比東京低5-8度，需防風外套。建議早上出發，能見度最佳。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>&#128651; 交通速查</h2>
+    <div class="transport-info">
+      <div class="transport-item"><div class="label">成田&#8594;五反田</div>N'EX+山手線<br>~75分 | ~&#165;3,500/人</div>
+      <div class="transport-item"><div class="label">五反田&#8594;新宿</div>JR山手線外回<br>14分 | &#165;178/人</div>
+      <div class="transport-item"><div class="label">五反田&#8594;有樂町</div>JR山手線內回<br>15分 | &#165;178/人</div>
+      <div class="transport-item"><div class="label">新宿&#8594;河口湖</div>高速巴士<br>~110分 | &#165;2,200/人</div>
+    </div>
+    <div class="tip-box"><strong>Suica卡：</strong>建議購買 Welcome Suica（無押金、免退卡手續費），可在成田機場JR綠色窗口購買。</div>
+  </div>
+</div>
+
+<!-- ====== DAY 1 ====== -->
+<div class="tab" id="tab-day1">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">1</div>
+      <div class="day-info">
+        <h2>抵達東京 + 五反田探索</h2>
+        <div class="day-date">4月28日 (二) | 成田機場 &#8594; 五反田</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item transport">
+        <div class="tl-time">11:00</div>
+        <div class="tl-title">抵達成田機場 Terminal 2</div>
+        <div class="tl-desc">入境審查、提取行李（約30-45分鐘）</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item shop">
+        <div class="tl-time">11:45</div>
+        <div class="tl-title">購買 Welcome Suica 卡</div>
+        <div class="tl-desc">JR東日本旅行服務中心（成田機場T2），無押金，28天有效</div>
+        <span class="tl-tag tag-shop">購物</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">12:00</div>
+        <div class="tl-title">搭 JR 成田特快 (N'EX) 至品川站</div>
+        <div class="tl-desc">約65分鐘，票價約&#165;3,250/人。品川站轉 JR 山手線（內回）至五反田站（5分鐘）</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">13:30</div>
+        <div class="tl-title">抵達三井花園酒店五反田</div>
+        <div class="tl-desc">五反田站東口步行3分鐘。辦理入住（通常15:00後入房，可先寄放行李）</div>
+        <span class="tl-tag tag-hotel">住宿</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">14:00</div>
+        <div class="tl-title">五反田站周邊散步</div>
+        <div class="tl-desc">逛 7-Eleven / FamilyMart 補給零食飲料，藥妝店（松本清/大國藥妝）逛逛</div>
+        <span class="tl-tag tag-sight">探索</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">15:00</div>
+        <div class="tl-title">入住房間、休息整頓</div>
+        <div class="tl-desc">調整時差、整理行程</div>
+        <span class="tl-tag tag-hotel">住宿</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">18:00</div>
+        <div class="tl-title">晚餐：磯丸水産 五反田店</div>
+        <div class="tl-desc">海鮮燒烤 + 居酒屋氛圍！自己烤制活貝/蟹味噌甲殼燒，人均約&#165;2,000</div>
+        <span class="tl-tag tag-food">&#127843; 燒烤+居酒屋</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">20:00</div>
+        <div class="tl-title">回飯店休息</div>
+        <div class="tl-desc">隔天富士山需早起，建議早點休息！</div>
+      </div>
+    </div>
+
+    <div class="resto-card">
+      <div class="emoji">&#127843;</div>
+      <div>
+        <div class="name">磯丸水産 五反田店</div>
+        <div class="meta">&#128205; 五反田站步行2分 | &#128176; 人均 ~&#165;2,000 | &#128337; 24小時營業</div>
+        <div class="desc">海鮮居酒屋人氣店！現烤活貝殼、蟹味噌甲殼燒、刺身拼盤，氣氛熱鬧，非常適合第一晚體驗。建議提前在食べログ App 預約。</div>
+      </div>
+    </div>
+
+    <div class="tip-box"><strong>Tips：</strong>成田機場到五反田約75分鐘。建議在機場先換少量日幣(~&#165;10,000)，其餘用銀聯卡/信用卡消費。</div>
+  </div>
+
+  <div class="section">
+    <h2>&#128506; Day 1 地圖</h2>
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=Mitsui+Garden+Hotel+Gotanda+Tokyo&z=15&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <a class="map-btn" href="https://www.google.com/maps/dir/Narita+International+Airport/Mitsui+Garden+Hotel+Gotanda+Tokyo" target="_blank">&#128506; 在 Google Maps 查看路線</a>
+  </div>
+</div>
+
+<!-- ====== DAY 2 ====== -->
+<div class="tab" id="tab-day2">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">2</div>
+      <div class="day-info">
+        <h2>富士山一日遊</h2>
+        <div class="day-date">4月29日 (三) | 五合目 &#8594; 忍野八海 &#8594; 大石公園</div>
+      </div>
+    </div>
+
+    <div class="warn-box"><strong>注意：</strong>富士山上午能見度最高！建議早出發，避開午後雲霧。4月底五合目全天開放但僅限觀景平台，非登山季無法進入登山路線。</div>
+
+    <div class="timeline">
+      <div class="tl-item transport">
+        <div class="tl-time">06:30</div>
+        <div class="tl-title">五反田出發 &#8594; 新宿站</div>
+        <div class="tl-desc">JR 山手線外回，14分鐘，&#165;178/人</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">07:30</div>
+        <div class="tl-title">新宿高速巴士總站 (Busta) &#8594; 河口湖</div>
+        <div class="tl-desc">富士急行高速巴士，約105-115分鐘，&#165;2,200/人。建議提前1-2週在 Highway Bus 官網預訂。</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">09:15</div>
+        <div class="tl-title">抵達河口湖站</div>
+        <div class="tl-desc">寄放行李（車站儲物櫃，大櫃約&#165;600）</div>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">09:30</div>
+        <div class="tl-title">搭登山巴士赴五合目</div>
+        <div class="tl-desc">富士急行登山巴士，約55分鐘，&#165;1,780-1,950/人。河口湖站巴士櫃台購票。</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">10:30</div>
+        <div class="tl-title">富士山五合目觀景</div>
+        <div class="tl-desc">觀景平台飽覽雲海、參拜小御嶽神社、逛紀念品店。記得帶保溫杯接富士山融雪水！停留約1.5小時。</div>
+        <span class="tl-tag tag-sight">景點</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">12:00</div>
+        <div class="tl-title">登山巴士返回河口湖站</div>
+        <div class="tl-desc">約55分鐘車程</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">13:00</div>
+        <div class="tl-title">河口湖站 &#8594; 忍野八海</div>
+        <div class="tl-desc">富士急巴士A1線，約23-34分鐘，約&#165;300-500/人</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">13:30</div>
+        <div class="tl-title">忍野八海觀光 + 午餐</div>
+        <div class="tl-desc">世界遺產富士山組成資產之一！八處清澈湧泉群，富士山景觀位超美。</div>
+        <span class="tl-tag tag-sight">景點</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">13:45</div>
+        <div class="tl-title">午餐：池本茶屋</div>
+        <div class="tl-desc">忍野八海蕎麥麵定食，人均&#165;1,200。景觀位可看富士山，手打蕎麥麵超推！</div>
+        <span class="tl-tag tag-food">&#127836; 蕎麥麵</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">14:30</div>
+        <div class="tl-title">忍野八海 &#8594; 大石公園</div>
+        <div class="tl-desc">搭巴士返回河口湖，轉紅線周遊巴士至大石公園，約30分鐘</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">15:00</div>
+        <div class="tl-title">大石公園</div>
+        <div class="tl-desc">河口湖畔經典打卡點！天氣好可拍逆富士倒影，薰衣草季前但花田仍美。停留約45分鐘。</div>
+        <span class="tl-tag tag-sight">景點</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">15:45</div>
+        <div class="tl-title">河口湖站自由活動</div>
+        <div class="tl-desc">推薦 LAKE BAKE 麵包店，採購富士山限定麵包作伴手禮</div>
+        <span class="tl-tag tag-shop">購物</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">16:30</div>
+        <div class="tl-title">河口湖站 &#8594; 新宿（高速巴士）</div>
+        <div class="tl-desc">約105-115分鐘，&#165;2,200/人。避開晚高峰。</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">18:30</div>
+        <div class="tl-title">新宿 &#8594; 五反田</div>
+        <div class="tl-desc">JR 山手線內回，14分鐘</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">19:00</div>
+        <div class="tl-title">晚餐：酒田屋（五反田）</div>
+        <div class="tl-desc">燒鳥套餐，雞肉新鮮多汁，居酒屋氛圍，人均約&#165;2,500</div>
+        <span class="tl-tag tag-food">&#127831; 燒鳥居酒屋</span>
+      </div>
+    </div>
+
+    <h3>&#128652; 富士山交通費用（雙人）</h3>
+    <table class="budget-table">
+      <tr><th>路段</th><th>方式</th><th>單人</th><th>雙人</th></tr>
+      <tr><td>五反田&#8594;新宿</td><td>JR山手線</td><td>&#165;178</td><td>&#165;356</td></tr>
+      <tr><td>新宿&#8594;河口湖</td><td>高速巴士</td><td>&#165;2,200</td><td>&#165;4,400</td></tr>
+      <tr><td>河口湖&#8594;五合目</td><td>登山巴士（來回）</td><td>&#165;3,560</td><td>&#165;7,120</td></tr>
+      <tr><td>河口湖&#8594;忍野八海</td><td>路線巴士</td><td>~&#165;500</td><td>~&#165;1,000</td></tr>
+      <tr><td>河口湖周遊</td><td>紅線巴士一日券</td><td>&#165;1,500</td><td>&#165;3,000</td></tr>
+      <tr><td>河口湖&#8594;新宿</td><td>高速巴士</td><td>&#165;2,200</td><td>&#165;4,400</td></tr>
+      <tr><td>新宿&#8594;五反田</td><td>JR山手線</td><td>&#165;178</td><td>&#165;356</td></tr>
+      <tr class="total"><td colspan="3">Day 2 交通合計</td><td>~&#165;20,632</td></tr>
+    </table>
+
+    <div class="tip-box"><strong>備案：</strong>若富士山被雲霧遮擋，可改赴富士急樂園（高速巴士直達，門票約&#165;4,000/人），或改去河口湖美術館。</div>
+    <div class="tip-box"><strong>塞車備案：</strong>若高速巴士塞車，可改乘 JR 中央線&#8594;大月站轉富士急行線（約2.5小時，~&#165;2,500/人）。</div>
+  </div>
+
+  <div class="section">
+    <h2>&#128506; Day 2 地圖</h2>
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=Kawaguchiko+Station+Yamanashi+Japan&z=11&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <a class="map-btn" href="https://www.google.com/maps/dir/Gotanda+Station+Tokyo/Shinjuku+Expressway+Bus+Terminal/Kawaguchiko+Station/Mt+Fuji+5th+Station/Oshino+Hakkai/Oishi+Park+Kawaguchiko/Kawaguchiko+Station" target="_blank">&#128506; 在 Google Maps 查看完整路線</a>
+  </div>
+</div>
+
+<!-- ====== DAY 3 ====== -->
+<div class="tab" id="tab-day3">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">3</div>
+      <div class="day-info">
+        <h2>銀座購物日</h2>
+        <div class="day-date">4月30日 (四) | 有樂町 &#8594; 銀座 | 無印良品 + SK-II</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item transport">
+        <div class="tl-time">09:30</div>
+        <div class="tl-title">五反田 &#8594; 有樂町站</div>
+        <div class="tl-desc">JR 山手線內回，15分鐘，&#165;178/人</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item shop">
+        <div class="tl-time">10:00</div>
+        <div class="tl-title">無印良品 有樂町 ITO CiA 店</div>
+        <div class="tl-desc">共3層（1-2F服飾、3F家居），附 Cafe&Meal MUJI。採購透明小塑膠瓶、香氛機、睡眠噴霧。退稅：一般物品滿&#165;10,000、消耗品滿&#165;5,000，4F退稅櫃台出示護照。預留2小時。</div>
+        <span class="tl-tag tag-shop">&#128722; 購物</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">12:00</div>
+        <div class="tl-title">午餐：SHARI THE TOKYO SUSHI BAR</div>
+        <div class="tl-desc">有樂町創意壽司 + 居酒屋氛圍，人均&#165;2,500。台灣網友推薦！</div>
+        <span class="tl-tag tag-food">&#127843; 壽司</span>
+      </div>
+      <div class="tl-item shop">
+        <div class="tl-time">13:30</div>
+        <div class="tl-title">銀座三越 B1F - SK-II 專櫃</div>
+        <div class="tl-desc">SK-II 乳液、化妝水採購。持護照享95折+8%退稅（扣1.1%手續費）。2026/4/2-5/9刷銀聯卡滿&#165;200,000減&#165;3,000。套裝比國內便宜約30%。預留1.5小時。</div>
+        <span class="tl-tag tag-shop">&#128722; 購物</span>
+      </div>
+      <div class="tl-item shop">
+        <div class="tl-time">15:00</div>
+        <div class="tl-title">銀座松屋 - 伴手禮 + 氣墊/腮紅</div>
+        <div class="tl-desc">B1F：白色戀人、Royce' 生巧克力、東京香蕉。1F化妝品櫃：香奈兒腮紅、氣墊粉餅。均支持免稅+銀聯優惠。</div>
+        <span class="tl-tag tag-shop">&#128722; 購物</span>
+      </div>
+      <div class="tl-item shop">
+        <div class="tl-time">16:00</div>
+        <div class="tl-title">銀座 LOFT</div>
+        <div class="tl-desc">2F日本開架彩妝、4F廚房雜貨，文創小物超好逛</div>
+        <span class="tl-tag tag-shop">&#128722; 購物</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">17:00</div>
+        <div class="tl-title">下午茶：hiiragiginza 抹茶冰山</div>
+        <div class="tl-desc">銀座人氣抹茶店！抹茶冰山每日限量，抹茶師現場製作，視覺效果拉滿。人均&#165;1,500</div>
+        <span class="tl-tag tag-food">&#127861; 抹茶</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">18:30</div>
+        <div class="tl-title">晚餐：Ginza Yoshizawa Nikudokoro</div>
+        <div class="tl-desc">大正13年創立的和牛壽喜燒老店！《非自然死亡》取景地。人均&#165;4,500，建議提前在食べログ預約。</div>
+        <span class="tl-tag tag-food">&#129385; 壽喜燒</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">20:00</div>
+        <div class="tl-title">銀座 &#8594; 五反田</div>
+        <div class="tl-desc">JR山手線外回，約15分鐘</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+    </div>
+
+    <h3>&#128176; 購物退稅 Tips</h3>
+    <div class="tip-box"><strong>無印良品：</strong>優先採購海外限定食品（日本產抹茶粉、有機零食），比台灣便宜約20%。退稅需出示護照至4F專屬櫃台。</div>
+    <div class="tip-box"><strong>SK-II：</strong>建議買套裝（神仙水+小燈泡+大紅瓶），比單買更划算。滿&#165;200,000記得刷銀聯卡減&#165;3,000。神仙水230ml套裝約&#165;12,000。</div>
+    <div class="tip-box"><strong>伴手禮：</strong>銀座三越B1F的白色戀人、Royce'生巧克力，記得留好退稅單（機場取貨需出示）。</div>
+
+    <div class="resto-card">
+      <div class="emoji">&#127843;</div>
+      <div>
+        <div class="name">SHARI THE TOKYO SUSHI BAR</div>
+        <div class="meta">&#128205; 有樂町 | &#128176; 人均 ~&#165;2,500</div>
+        <div class="desc">創意壽司，食材新鮮，居酒屋氛圍輕鬆。離無印良品步行5分鐘。</div>
+      </div>
+    </div>
+    <div class="resto-card">
+      <div class="emoji">&#129385;</div>
+      <div>
+        <div class="name">Ginza Yoshizawa Nikudokoro 銀座吉澤</div>
+        <div class="meta">&#128205; 銀座 | &#128176; 人均 ~&#165;4,500 | 建議預約</div>
+        <div class="desc">百年和牛壽喜燒老店，肉質入口即化。日劇《非自然死亡》取景地，氣氛典雅。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>&#128506; Day 3 地圖</h2>
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=Ginza+Chuo+Tokyo+Japan&z=15&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <a class="map-btn" href="https://www.google.com/maps/dir/Gotanda+Station+Tokyo/MUJI+Yurakucho+Tokyo/Ginza+Mitsukoshi+Tokyo/Matsuzakaya+Ginza+Tokyo/Gotanda+Station+Tokyo" target="_blank">&#128506; 在 Google Maps 查看完整路線</a>
+  </div>
+</div>
+
+<!-- ====== DAY 4 ====== -->
+<div class="tab" id="tab-day4">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">4</div>
+      <div class="day-info">
+        <h2>東京市區自由探索</h2>
+        <div class="day-date">5月1日 (五) | 新宿 &#8594; 澀谷 | 拉麵 + 燒肉 + 甜點</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item transport">
+        <div class="tl-time">09:30</div>
+        <div class="tl-title">五反田 &#8594; 新宿</div>
+        <div class="tl-desc">JR 山手線外回，14分鐘</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">10:00</div>
+        <div class="tl-title">新宿御苑</div>
+        <div class="tl-desc">4月底可能有晚櫻，入園費&#165;500/人。佔地58.3公頃的都市綠洲，日式庭園、英式風景園、法式整形庭園三種風格。散步約1.5小時。</div>
+        <span class="tl-tag tag-sight">景點</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">12:00</div>
+        <div class="tl-title">午餐：AFURI 阿富利拉麵（新宿店）</div>
+        <div class="tl-desc">柚子鹽拉麵超人氣！清爽柚子湯底+細麵，人均&#165;1,200。排隊通常20-30分鐘。</div>
+        <span class="tl-tag tag-food">&#127836; 阿富利拉麵</span>
+      </div>
+      <div class="tl-item shop">
+        <div class="tl-time">13:30</div>
+        <div class="tl-title">新宿伊勢丹百貨</div>
+        <div class="tl-desc">日本最頂級百貨之一！B1F食品街必逛、1F化妝品專櫃。可補買氣墊粉餅或其他美妝。</div>
+        <span class="tl-tag tag-shop">&#128722; 購物</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">15:00</div>
+        <div class="tl-title">新宿 &#8594; 澀谷</div>
+        <div class="tl-desc">JR 山手線內回，約7分鐘</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">15:15</div>
+        <div class="tl-title">Beard Papa's 澀谷地下街店</div>
+        <div class="tl-desc">現烤泡芙！宇治抹茶味為春季限定，奶油超濃郁。單顆約&#165;250-350</div>
+        <span class="tl-tag tag-food">&#129473; 泡芙</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">15:30</div>
+        <div class="tl-title">澀谷十字路口 + 忠犬八公像</div>
+        <div class="tl-desc">世界最繁忙的十字路口，必拍打卡！八公像在站前廣場。</div>
+        <span class="tl-tag tag-sight">景點</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">16:00</div>
+        <div class="tl-title">澀谷逛街</div>
+        <div class="tl-desc">SHIBUYA 109、Shibuya PARCO、澀谷Scramble Square 等，年輕潮流聖地</div>
+        <span class="tl-tag tag-shop">&#128722; 購物</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">17:00</div>
+        <div class="tl-title">哈根達斯 新宿高島屋店</div>
+        <div class="tl-desc">春季限定櫻花/抹茶口味！單球約&#165;350，日本限定口味比台灣便宜且選擇多。回新宿順路享用。</div>
+        <span class="tl-tag tag-food">&#127846; 哈根達斯</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">18:30</div>
+        <div class="tl-title">晚餐：叙々苑燒肉 新宿店</div>
+        <div class="tl-desc">日本頂級和牛燒肉連鎖！午市套餐較便宜，晚餐人均約&#165;5,000。肉質入口即化，醬汁絕配。</div>
+        <span class="tl-tag tag-food">&#129385; 燒肉</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">20:30</div>
+        <div class="tl-title">新宿居酒屋街散步</div>
+        <div class="tl-desc">思い出横丁（回憶橫丁）走走逛逛，感受日式居酒屋氣氛。若肚子還有空間可以小酌一杯。</div>
+        <span class="tl-tag tag-sight">探索</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">21:00</div>
+        <div class="tl-title">新宿 &#8594; 五反田</div>
+        <div class="tl-desc">JR山手線內回，14分鐘。回飯店打包整理行李。</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+    </div>
+
+    <div class="resto-card">
+      <div class="emoji">&#127836;</div>
+      <div>
+        <div class="name">AFURI 阿富利拉麵</div>
+        <div class="meta">&#128205; 新宿 | &#128176; 人均 ~&#165;1,200</div>
+        <div class="desc">招牌柚子鹽拉麵，清爽不膩！湯底用丹澤山系天然水熬製，配上自家製細麵。許願池必吃清單之一！</div>
+      </div>
+    </div>
+    <div class="resto-card">
+      <div class="emoji">&#129385;</div>
+      <div>
+        <div class="name">叙々苑 新宿店</div>
+        <div class="meta">&#128205; 新宿 | &#128176; 人均 ~&#165;5,000 | 建議預約</div>
+        <div class="desc">日本頂級和牛燒肉！A5黑毛和牛，肉質如奶油般入口即化。服務一流，適合犒賞自己的一餐。</div>
+      </div>
+    </div>
+
+    <div class="tip-box"><strong>咖喱飯備案：</strong>若叙々苑預算太高，可改為 CoCo壱番屋咖喱飯（新宿多家分店，人均&#165;800-1,200），同樣美味且省錢！或到新宿附近的印度咖喱名店。</div>
+  </div>
+
+  <div class="section">
+    <h2>&#128506; Day 4 地圖</h2>
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=Shinjuku+Station+Tokyo&z=14&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <a class="map-btn" href="https://www.google.com/maps/dir/Gotanda+Station+Tokyo/Shinjuku+Gyoen+National+Garden/Shibuya+Crossing/Shinjuku+Station+Tokyo/Gotanda+Station+Tokyo" target="_blank">&#128506; 在 Google Maps 查看完整路線</a>
+  </div>
+</div>
+
+<!-- ====== DAY 5 ====== -->
+<div class="tab" id="tab-day5">
+  <div class="section">
+    <div class="day-header">
+      <div class="day-num">5</div>
+      <div class="day-info">
+        <h2>返程日</h2>
+        <div class="day-date">5月2日 (六) | 東京站伴手禮 &#8594; 成田機場</div>
+      </div>
+    </div>
+
+    <div class="warn-box"><strong>航班提醒：</strong>IT203 成田T2 19:30起飛，建議17:00前抵達機場。成田特快從東京站出發約60分鐘。</div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">08:00</div>
+        <div class="tl-title">起床、打包行李</div>
+        <div class="tl-desc">整理購物戰利品，確認退稅單據齊全</div>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">09:00</div>
+        <div class="tl-title">早餐：飯店附近咖啡廳或便利商店</div>
+        <div class="tl-desc">五反田站周邊有多家早餐店，或便利商店簡單解決</div>
+        <span class="tl-tag tag-food">&#127861; 早餐</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">11:00</div>
+        <div class="tl-title">退房</div>
+        <div class="tl-desc">三井花園酒店退房時間11:00。行李可寄放飯店或車站置物櫃。</div>
+        <span class="tl-tag tag-hotel">住宿</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">11:15</div>
+        <div class="tl-title">五反田 &#8594; 東京站</div>
+        <div class="tl-desc">JR 山手線外回，約20分鐘</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item shop">
+        <div class="tl-time">11:30</div>
+        <div class="tl-title">東京站一番街 最後採買</div>
+        <div class="tl-desc">東京Banana、Press Butter Sand、薯條三兄弟等人氣伴手禮集中地！地下街超好逛。</div>
+        <span class="tl-tag tag-shop">&#128722; 購物</span>
+      </div>
+      <div class="tl-item meal">
+        <div class="tl-time">12:30</div>
+        <div class="tl-title">午餐：東京站拉麵街 或 咖喱飯</div>
+        <div class="tl-desc">東京站八重洲地下街「東京拉麵街」集結8家名店。或試試車站內的印度咖喱飯，完成許願池清單！人均&#165;1,000-1,500</div>
+        <span class="tl-tag tag-food">&#127835; 咖喱飯</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">14:00</div>
+        <div class="tl-title">東京站周邊最後逛逛</div>
+        <div class="tl-desc">丸之內大樓、KITTE 郵局大樓，從展望台可看東京車站全景</div>
+        <span class="tl-tag tag-sight">景點</span>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">15:00</div>
+        <div class="tl-title">東京站 &#8594; 成田機場 (N'EX)</div>
+        <div class="tl-desc">JR 成田特快，約60分鐘直達 NRT Terminal 2。票價約&#165;3,250/人</div>
+        <span class="tl-tag tag-transport">交通</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">16:00</div>
+        <div class="tl-title">抵達成田機場 Terminal 2</div>
+        <div class="tl-desc">辦理退稅取貨、報到手續、免稅店最後血拼</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">17:30</div>
+        <div class="tl-title">通過安檢、出境</div>
+        <div class="tl-desc">免稅區內還有最後機會買零食和紀念品</div>
+      </div>
+      <div class="tl-item transport">
+        <div class="tl-time">19:30</div>
+        <div class="tl-title">IT203 起飛 NRT &#8594; TPE</div>
+        <div class="tl-desc">飛行時間約3小時，22:35抵達桃園機場T1</div>
+        <span class="tl-tag tag-transport">&#9992;&#65039; 起飛</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">22:35</div>
+        <div class="tl-title">抵達桃園國際機場</div>
+        <div class="tl-desc">歡迎回家！東京之旅圓滿結束</div>
+      </div>
+    </div>
+
+    <div class="tip-box"><strong>退稅提醒：</strong>大型商場退稅扣1.1%手續費。機場免稅品取貨需出示退稅單。消耗品（化妝品/食品）包裝不可在日本境內拆封。</div>
+  </div>
+
+  <div class="section">
+    <h2>&#128506; Day 5 地圖</h2>
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=Tokyo+Station+Japan&z=14&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <a class="map-btn" href="https://www.google.com/maps/dir/Mitsui+Garden+Hotel+Gotanda+Tokyo/Tokyo+Station/Narita+International+Airport" target="_blank">&#128506; 在 Google Maps 查看完整路線</a>
+  </div>
+</div>
+
+<!-- ====== SHOPPING TAB ====== -->
+<div class="tab" id="tab-shopping">
+  <div class="section">
+    <h2>&#128722; 購物許願池</h2>
+    <div class="progress-text" id="prog-text">0 / 0 已完成</div>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+
+    <h3>&#127836; 美食清單</h3>
+    <ul class="checklist" id="food-list">
+      <li><input type="checkbox" data-key="f1"><span class="item-name">阿富利拉麵 AFURI</span><span class="item-note">Day4 新宿</span></li>
+      <li><input type="checkbox" data-key="f2"><span class="item-name">壽司</span><span class="item-note">Day3 有樂町</span></li>
+      <li><input type="checkbox" data-key="f3"><span class="item-name">壽喜燒</span><span class="item-note">Day3 銀座吉澤</span></li>
+      <li><input type="checkbox" data-key="f4"><span class="item-name">燒肉</span><span class="item-note">Day4 叙々苑</span></li>
+      <li><input type="checkbox" data-key="f5"><span class="item-name">燒烤 / 烤串</span><span class="item-note">Day1 磯丸水産</span></li>
+      <li><input type="checkbox" data-key="f6"><span class="item-name">咖喱飯</span><span class="item-note">Day5 東京站</span></li>
+      <li><input type="checkbox" data-key="f7"><span class="item-name">居酒屋</span><span class="item-note">Day1 磯丸 / Day2 酒田屋</span></li>
+      <li><input type="checkbox" data-key="f8"><span class="item-name">抹茶甜點</span><span class="item-note">Day3 hiiragiginza</span></li>
+      <li><input type="checkbox" data-key="f9"><span class="item-name">泡芙</span><span class="item-note">Day4 Beard Papa's</span></li>
+      <li><input type="checkbox" data-key="f10"><span class="item-name">哈根達斯</span><span class="item-note">Day4 新宿高島屋</span></li>
+    </ul>
+
+    <h3>&#127981; 無印良品必買</h3>
+    <ul class="checklist" id="muji-list">
+      <li><input type="checkbox" data-key="m1"><span class="item-name">透明小塑膠瓶</span><span class="item-note">Day3 有樂町MUJI</span></li>
+      <li><input type="checkbox" data-key="m2"><span class="item-name">香氛機</span><span class="item-note">Day3 有樂町MUJI</span></li>
+      <li><input type="checkbox" data-key="m3"><span class="item-name">睡眠噴霧</span><span class="item-note">Day3 有樂町MUJI</span></li>
+    </ul>
+
+    <h3>&#128085; 免稅必買</h3>
+    <ul class="checklist" id="duty-list">
+      <li><input type="checkbox" data-key="d1"><span class="item-name">SK-II 乳液</span><span class="item-note">Day3 銀座三越</span></li>
+      <li><input type="checkbox" data-key="d2"><span class="item-name">SK-II 化妝水（考慮）</span><span class="item-note">Day3 銀座三越</span></li>
+      <li><input type="checkbox" data-key="d3"><span class="item-name">氣墊粉餅</span><span class="item-note">Day3 銀座松屋/Day4 伊勢丹</span></li>
+      <li><input type="checkbox" data-key="d4"><span class="item-name">香奈兒腮紅</span><span class="item-note">Day3 銀座松屋</span></li>
+    </ul>
+
+    <h3>&#127873; 伴手禮推薦</h3>
+    <ul class="checklist" id="souvenir-list">
+      <li><input type="checkbox" data-key="s1"><span class="item-name">東京Banana</span><span class="item-note">Day5 東京站</span></li>
+      <li><input type="checkbox" data-key="s2"><span class="item-name">白色戀人</span><span class="item-note">Day3 銀座松屋</span></li>
+      <li><input type="checkbox" data-key="s3"><span class="item-name">Royce' 生巧克力</span><span class="item-note">Day3 銀座松屋</span></li>
+      <li><input type="checkbox" data-key="s4"><span class="item-name">富士山限定麵包</span><span class="item-note">Day2 LAKE BAKE</span></li>
+      <li><input type="checkbox" data-key="s5"><span class="item-name">Press Butter Sand</span><span class="item-note">Day5 東京站</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ====== BUDGET TAB ====== -->
+<div class="tab" id="tab-budget">
+  <div class="section">
+    <h2>&#128176; 預算總覽（雙人合計）</h2>
+    <p style="font-size:.88rem;color:#888;margin-bottom:16px">匯率：1 TWD &#8776; 4.5 JPY | 總預算 40,000 TWD &#8776; &#165;180,000</p>
+
+    <table class="budget-table">
+      <tr><th>項目</th><th>預估費用 (JPY)</th><th>備註</th></tr>
+      <tr>
+        <td><strong>&#9992;&#65039; 機場交通</strong></td>
+        <td>&#165;14,000</td>
+        <td>成田&#8596;五反田 N'EX+山手線 &#165;3,500/人 &#215; 2人 &#215; 2趟</td>
+      </tr>
+      <tr>
+        <td><strong>&#128651; 富士山交通</strong></td>
+        <td>&#165;20,600</td>
+        <td>高速巴士+登山巴士+周遊巴士（雙人）</td>
+      </tr>
+      <tr>
+        <td><strong>&#128643; 市內交通</strong></td>
+        <td>&#165;4,000</td>
+        <td>JR山手線 3天 &#215; ~&#165;700/天/人</td>
+      </tr>
+      <tr style="background:#E3F2FD">
+        <td><strong>交通小計</strong></td>
+        <td><strong>&#165;38,600</strong></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><strong>&#127968; 住宿</strong></td>
+        <td>&#165;40,000</td>
+        <td>三井花園五反田 &#165;10,000/晚 &#215; 4晚</td>
+      </tr>
+      <tr>
+        <td><strong>&#127860; Day1 餐飲</strong></td>
+        <td>&#165;5,000</td>
+        <td>晚餐磯丸水産 &#165;2,000&#215;2 + 零食</td>
+      </tr>
+      <tr>
+        <td><strong>&#127860; Day2 餐飲</strong></td>
+        <td>&#165;8,000</td>
+        <td>午餐池本茶屋 + 晚餐酒田屋</td>
+      </tr>
+      <tr>
+        <td><strong>&#127860; Day3 餐飲</strong></td>
+        <td>&#165;18,000</td>
+        <td>壽司&#165;5,000 + 抹茶&#165;3,000 + 壽喜燒&#165;9,000 + 零食</td>
+      </tr>
+      <tr>
+        <td><strong>&#127860; Day4 餐飲</strong></td>
+        <td>&#165;15,000</td>
+        <td>拉麵&#165;2,400 + 泡芙&#165;700 + 哈根達斯&#165;700 + 燒肉&#165;10,000 + 其他</td>
+      </tr>
+      <tr>
+        <td><strong>&#127860; Day5 餐飲</strong></td>
+        <td>&#165;4,000</td>
+        <td>早餐 + 午餐咖喱飯</td>
+      </tr>
+      <tr style="background:#FFF3E0">
+        <td><strong>餐飲小計</strong></td>
+        <td><strong>&#165;50,000</strong></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><strong>&#128722; 無印良品</strong></td>
+        <td>&#165;15,000</td>
+        <td>香氛機+塑膠瓶+睡眠噴霧+其他</td>
+      </tr>
+      <tr>
+        <td><strong>&#128722; SK-II + 化妝品</strong></td>
+        <td>&#165;25,000</td>
+        <td>SK-II乳液/化妝水 + 氣墊 + 腮紅</td>
+      </tr>
+      <tr>
+        <td><strong>&#128722; 伴手禮</strong></td>
+        <td>&#165;8,000</td>
+        <td>白色戀人/生巧/東京Banana等</td>
+      </tr>
+      <tr style="background:#E8F5E9">
+        <td><strong>購物小計</strong></td>
+        <td><strong>&#165;48,000</strong></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><strong>&#127915; 門票/雜費</strong></td>
+        <td>&#165;3,000</td>
+        <td>新宿御苑&#165;1,000 + 置物櫃&#165;1,200 + 其他</td>
+      </tr>
+      <tr class="total">
+        <td>&#128176; 總計</td>
+        <td>&#165;179,600</td>
+        <td>&#8776; 39,900 TWD</td>
+      </tr>
+    </table>
+
+    <div class="budget-note">* 以上為預估金額，實際花費可能有所浮動。建議攜帶約&#165;10,000現金+信用卡/銀聯卡作為彈性備用。</div>
+    <div class="tip-box"><strong>省錢Tips：</strong>叙々苑午市套餐約&#165;2,500起（比晚餐便宜一半）；便利商店早餐約&#165;500/人；善用退稅+銀聯優惠可省下不少！</div>
+  </div>
+
+  <div class="section">
+    <h2>&#128179; 付款方式建議</h2>
+    <div class="transport-info">
+      <div class="transport-item" style="background:#E8F5E9"><div class="label">&#128179; 銀聯卡</div>百貨公司/免稅店首選<br>銀座滿&#165;200,000減&#165;3,000</div>
+      <div class="transport-item" style="background:#FFF3E0"><div class="label">&#128179; 信用卡</div>Visa/Mastercard<br>大部分商店/餐廳可用</div>
+      <div class="transport-item" style="background:#E3F2FD"><div class="label">&#128176; 現金</div>小店/自動售票機<br>建議備&#165;10,000-20,000</div>
+      <div class="transport-item" style="background:#F3E5F5"><div class="label">&#128241; Suica卡</div>交通+便利商店<br>Welcome Suica 免退卡費</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- container -->
+
+<!-- FOOTER -->
+<div style="text-align:center;padding:20px;font-size:.8rem;color:#aaa;background:#fff;margin-top:20px">
+  2026 東京自由行規劃 | 4/28-5/2 | 雙人 | 三井花園酒店五反田<br>
+  建議提前預約熱門餐廳（食べログ App）& 高速巴士（Highway Bus 官網）
+</div>
+
+<script>
+// TAB SWITCHING
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const btns=document.querySelectorAll('.nav button');
+  const map={overview:0,day1:1,day2:2,day3:3,day4:4,day5:5,shopping:6,budget:7};
+  if(map[id]!==undefined) btns[map[id]].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// SHOPPING CHECKLIST - localStorage persistence
+function initChecklist(){
+  const boxes=document.querySelectorAll('.checklist input[type=checkbox]');
+  boxes.forEach(cb=>{
+    const key='tokyo_'+cb.dataset.key;
+    cb.checked=localStorage.getItem(key)==='true';
+    cb.closest('li').classList.toggle('checked',cb.checked);
+    cb.addEventListener('change',()=>{
+      localStorage.setItem(key,cb.checked);
+      cb.closest('li').classList.toggle('checked',cb.checked);
+      updateProgress();
+    });
+  });
+  updateProgress();
+}
+function updateProgress(){
+  const boxes=document.querySelectorAll('.checklist input[type=checkbox]');
+  const total=boxes.length;
+  const done=[...boxes].filter(c=>c.checked).length;
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=done+' / '+total+' 已完成 ('+pct+'%)';
+}
+initChecklist();
+
+// COLLAPSIBLE sections
+document.querySelectorAll('.collapsible').forEach(el=>{
+  el.addEventListener('click',()=>{
+    el.classList.toggle('collapsed');
+    const content=el.nextElementSibling;
+    if(content) content.classList.toggle('collapsed');
+  });
+});
+
+// Swipe support for mobile
+let touchStartX=0;
+const tabOrder=['overview','day1','day2','day3','day4','day5','shopping','budget'];
+document.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
+document.addEventListener('touchend',e=>{
+  const diff=e.changedTouches[0].screenX-touchStartX;
+  if(Math.abs(diff)<80)return;
+  const current=tabOrder.findIndex(id=>document.getElementById('tab-'+id).classList.contains('active'));
+  if(diff<0 && current<tabOrder.length-1) showTab(tabOrder[current+1]);
+  if(diff>0 && current>0) showTab(tabOrder[current-1]);
+},{passive:true});
+</script>
+</body>
+</html>
